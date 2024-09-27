@@ -1,37 +1,40 @@
-// src/Wheel.js
 import React, { useState } from 'react';
-import './Wheel.css'; // Çark stil dosyasını ekleyeceğiz
 
 const Wheel = () => {
-  const [score, setScore] = useState(0);
-  const [isSpinning, setIsSpinning] = useState(false);
-  
-  const points = [10, 20, 30, 40, 50, 100]; // Puan değerleri
+    const [spinning, setSpinning] = useState(false);
+    const [prize, setPrize] = useState(null);
 
-  const spinWheel = () => {
-    if (!isSpinning) {
-      setIsSpinning(true);
-      const randomPoint = points[Math.floor(Math.random() * points.length)];
-      setScore(score + randomPoint);
-      setTimeout(() => {
-        setIsSpinning(false);
-      }, 2000); // 2 saniye döndürme süresi
-    }
-  };
+    const segments = [0, 1, 10, 20, 30, 40]; // Ödüller
+    const totalSegments = segments.length;
 
-  return (
-    <div style={{ textAlign: 'center', marginTop: '20px' }}>
-      <h2>Your Score: {score}</h2>
-      <div className={`wheel ${isSpinning ? 'spin' : ''}`} onClick={spinWheel}>
-        <div className="segment">10</div>
-        <div className="segment">20</div>
-        <div className="segment">30</div>
-        <div className="segment">40</div>
-        <div className="segment">50</div>
-        <div className="segment">100</div>
-      </div>
-    </div>
-  );
+    const spinWheel = () => {
+        if (spinning) return;
+        setSpinning(true);
+
+        const spinDuration = 3000; // 3 saniyelik döndürme
+        const randomIndex = Math.floor(Math.random() * totalSegments); // Rastgele ödül seçimi
+
+        setTimeout(() => {
+            setPrize(segments[randomIndex]); // Kazanılan ödül
+            setSpinning(false);
+        }, spinDuration);
+    };
+
+    return (
+        <div className="wheel-container">
+            <div className={`wheel ${spinning ? 'spinning' : ''}`}>
+                {segments.map((segment, index) => (
+                    <div key={index} className="segment">
+                        {segment} KITTY
+                    </div>
+                ))}
+            </div>
+            <button onClick={spinWheel} disabled={spinning}>
+                {spinning ? 'Çark Dönüyor...' : 'Çarkı Çevir'}
+            </button>
+            {prize !== null && <p>Kazandığınız Ödül: {prize} KITTY!</p>}
+        </div>
+    );
 };
 
 export default Wheel;

@@ -1,35 +1,40 @@
-/* src/Wheel.css */
-.wheel {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  border: 10px solid #ccc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  transition: transform 2s ease;
+.wheel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
 }
 
-.spin {
-  transform: rotate(720deg);
+.wheel {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border: 5px solid #333;
+    overflow: hidden;
+    transform: rotate(0deg);
+    transition: transform 3s ease-out;
+}
+
+.wheel.spinning {
+    transform: rotate(1440deg); /* 4 tam tur döner */
 }
 
 .segment {
-  position: absolute;
-  width: 50%;
-  height: 50%;
-  border: 1px solid #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  color: white;
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    background-color: rgba(255, 165, 0, 0.7);
+    transform-origin: 100% 100%;
+    text-align: center;
+    padding-top: 40px;
+    font-size: 18px;
+    color: #fff;
 }
 
-.segment:nth-child(1) { transform: rotate(0deg); background: red; }
-.segment:nth-child(2) { transform: rotate(60deg); background: blue; }
-.segment:nth-child(3) { transform: rotate(120deg); background: green; }
-.segment:nth-child(4) { transform: rotate(180deg); background: yellow; }
-.segment:nth-child(5) { transform: rotate(240deg); background: orange; }
-.segment:nth-child(6) { transform: rotate(300deg); background: purple; }
+.segment:nth-child(1) { transform: rotate(0deg); }
+.segment:nth-child(2) { transform: rotate(60deg); }
+.segment:nth-child(3) { transform: rotate(120deg); }
+.segment:nth-child(4) { transform: rotate(180deg); }
+.segment:nth-child(5) { transform: rotate(240deg); }
+.segment:nth-child(6) { transform: rotate(300deg); }

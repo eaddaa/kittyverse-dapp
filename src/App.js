@@ -11,7 +11,7 @@ function App() {
     const connectWallet = async () => {
         if (typeof window.ethereum !== 'undefined') {
             try {
-                const provider = new ethers.BrowserProvider(window.ethereum);
+                const provider = new ethers.providers.Web3Provider(window.ethereum); // Change here
                 const accounts = await provider.send("eth_requestAccounts", []);
                 if (accounts.length > 0) {
                     setAccount(accounts[0]);
@@ -34,7 +34,7 @@ function App() {
             return;
         }
 
-        const provider = new ethers.BrowserProvider(window.ethereum); // Use BrowserProvider here
+        const provider = new ethers.providers.Web3Provider(window.ethereum); // Change here
         const signer = provider.getSigner();
 
         try {
@@ -70,3 +70,4 @@ function App() {
 }
 
 export default App;
+
