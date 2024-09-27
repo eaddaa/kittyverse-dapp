@@ -1,134 +1,46 @@
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-    font-family: Arial, sans-serif;
-}
-
 .wheel-container {
-    position: relative;
-    width: 300px;
-    height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
 }
 
 .wheel {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    position: relative;
-    transition: transform 4s cubic-bezier(0.1, 0.7, 0.2, 1);
+  width: 300px; /* Width of the wheel */
+  height: 300px; /* Height of the wheel */
+  border-radius: 50%; /* Makes the wheel circular */
+  border: 10px solid #ccc; /* Border around the wheel */
+  position: relative; /* Position for absolute elements inside */
+  transform: rotate(0deg); /* Initial rotation */
+  transition: transform 5s ease-out; /* Spin transition */
 }
 
-.segment {
-    position: absolute;
-    width: 50%;
-    height: 50%;
-    background-color: transparent;
-    border-left: 2px solid white;
-    clip-path: polygon(100% 100%, 100% 0%, 0% 0%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: bold;
-    font-size: 24px;
-    text-align: center;
+.sector {
+  position: absolute; /* Position sectors absolutely */
+  width: 50%; /* Each sector takes half the width */
+  height: 50%; /* Each sector takes half the height */
+  background-color: #f8d210; /* Default background color */
+  border: 1px solid #fff; /* White border for each sector */
+  transform-origin: 100% 100%; /* Set the rotation point to the bottom right */
 }
 
-.segment-1 {
-    transform: rotate(0deg);
-    background-color: #FF5733; /* Red */
+.sector:nth-child(1) { transform: rotate(0deg) skewY(-60deg); background-color: #f54242; } /* Red */
+.sector:nth-child(2) { transform: rotate(51.43deg) skewY(-60deg); background-color: #f5a442; } /* Orange */
+.sector:nth-child(3) { transform: rotate(102.86deg) skewY(-60deg); background-color: #f5d442; } /* Yellow */
+.sector:nth-child(4) { transform: rotate(154.29deg) skewY(-60deg); background-color: #9df542; } /* Light Green */
+.sector:nth-child(5) { transform: rotate(205.72deg) skewY(-60deg); background-color: #42f554; } /* Green */
+.sector:nth-child(6) { transform: rotate(257.15deg) skewY(-60deg); background-color: #42f5e6; } /* Cyan */
+.sector:nth-child(7) { transform: rotate(308.58deg) skewY(-60deg); background-color: #4292f5; } /* Blue */
+
+.spin-button {
+  margin-top: 20px; /* Space above the spin button */
+  padding: 10px 20px; /* Button padding */
+  font-size: 16px; /* Font size of the button text */
+  cursor: pointer; /* Cursor changes to pointer on hover */
 }
 
-.segment-2 {
-    transform: rotate(60deg);
-    background-color: #FFC300; /* Yellow */
-}
-
-.segment-3 {
-    transform: rotate(120deg);
-    background-color: #DAF7A6; /* Light Green */
-}
-
-.segment-4 {
-    transform: rotate(180deg);
-    background-color: #33FF57; /* Green */
-}
-
-.segment-5 {
-    transform: rotate(240deg);
-    background-color: #3385FF; /* Blue */
-}
-
-.segment-6 {
-    transform: rotate(300deg);
-    background-color: #FF33A1; /* Pink */
-}
-
-.segment-1::after {
-    content: "1";
-}
-
-.segment-2::after {
-    content: "2";
-}
-
-.segment-3::after {
-    content: "3";
-}
-
-.segment-4::after {
-    content: "4";
-}
-
-.segment-5::after {
-    content: "5";
-}
-
-.segment-6::after {
-    content: "6";
-}
-
-.center-circle {
-    width: 40px;
-    height: 40px;
-    background-color: white;
-    border-radius: 50%;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border: 2px solid #ccc;
-}
-
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    margin-top: 20px;
-    cursor: pointer;
-}
-
-.claim-button {
-    background-color: #4CAF50; /* Green */
-    color: white;
-    border: none;
-    border-radius: 5px;
-}
-
-.claim-button:hover {
-    background-color: #45a049; /* Darker Green */
-}
-
-#spinButton {
-    background-color: #008CBA; /* Blue */
-    color: white;
-    border: none;
-    border-radius: 5px;
-}
-
-#spinButton:hover {
-    background-color: #007B9E; /* Darker Blue */
+.prize-display {
+  margin-top: 20px; /* Space above the prize display */
+  font-size: 20px; /* Font size for the prize text */
+  color: #333; /* Text color */
 }
