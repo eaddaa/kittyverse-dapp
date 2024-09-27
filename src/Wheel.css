@@ -1,40 +1,46 @@
 .wheel-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
 }
 
 .wheel {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
-    border: 5px solid #333;
-    overflow: hidden;
-    transform: rotate(0deg);
-    transition: transform 3s ease-out;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 10px solid #ccc;
+  position: relative;
+  transform: rotate(0deg);
+  transition: transform 5s ease-out;
 }
 
-.wheel.spinning {
-    transform: rotate(1440deg); /* 4 tam tur döner */
+.sector {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  background-color: #f8d210;
+  border: 1px solid #fff;
+  transform-origin: 100% 100%;
 }
 
-.segment {
-    position: absolute;
-    width: 50%;
-    height: 50%;
-    background-color: rgba(255, 165, 0, 0.7);
-    transform-origin: 100% 100%;
-    text-align: center;
-    padding-top: 40px;
-    font-size: 18px;
-    color: #fff;
+.sector:nth-child(1) { transform: rotate(0deg) skewY(-60deg); background-color: #f54242; }
+.sector:nth-child(2) { transform: rotate(51.43deg) skewY(-60deg); background-color: #f5a442; }
+.sector:nth-child(3) { transform: rotate(102.86deg) skewY(-60deg); background-color: #f5d442; }
+.sector:nth-child(4) { transform: rotate(154.29deg) skewY(-60deg); background-color: #9df542; }
+.sector:nth-child(5) { transform: rotate(205.72deg) skewY(-60deg); background-color: #42f554; }
+.sector:nth-child(6) { transform: rotate(257.15deg) skewY(-60deg); background-color: #42f5e6; }
+.sector:nth-child(7) { transform: rotate(308.58deg) skewY(-60deg); background-color: #4292f5; }
+
+.spin-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
 }
 
-.segment:nth-child(1) { transform: rotate(0deg); }
-.segment:nth-child(2) { transform: rotate(60deg); }
-.segment:nth-child(3) { transform: rotate(120deg); }
-.segment:nth-child(4) { transform: rotate(180deg); }
-.segment:nth-child(5) { transform: rotate(240deg); }
-.segment:nth-child(6) { transform: rotate(300deg); }
+.prize-display {
+  margin-top: 20px;
+  font-size: 20px;
+  color: #333;
+}

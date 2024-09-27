@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import { ethers } from 'ethers';
 import { claimTokens } from './contract'; // Import the claimTokens function
-import './App.css'; // Import CSS styles for the wheel
+import Wheel from './Wheel'; // Import the Wheel component
 
 function App() {
     const [account, setAccount] = useState(null); // State to manage connected account
     const [isClaiming, setIsClaiming] = useState(false); // State to track claiming status
-    const [prize, setPrize] = useState(null); // State to track the prize from the wheel
 
     // Function to connect the wallet
     const connectWallet = async () => {
         if (typeof window.ethereum !== 'undefined') {
             try {
-                const provider = new ethers.providers.Web3Provider(window.ethereum); 
+                const provider = new ethers.providers.Web3Provider(window.ethereum); // Change here
                 const accounts = await provider.send("eth_requestAccounts", []);
                 if (accounts.length > 0) {
                     setAccount(accounts[0]);
@@ -35,7 +34,7 @@ function App() {
             return;
         }
 
-        const provider = new ethers.providers.Web3Provider(window.ethereum); 
+        const provider = new ethers.providers.Web3Provider(window.ethereum); // Change here
         const signer = provider.getSigner();
 
         try {
@@ -48,13 +47,6 @@ function App() {
         } finally {
             setIsClaiming(false); // Reset claiming state
         }
-    };
-
-    // Function to spin the wheel
-    const spinWheel = () => {
-        const prizes = ['0 KITTY', '10 KITTY', '20 KITTY', '30 KITTY', '40 KITTY', '50 KITTY', '60 KITTY', '100 KITTY'];
-        const randomIndex = Math.floor(Math.random() * prizes.length);
-        setPrize(prizes[randomIndex]); // Set the prize after spinning the wheel
     };
 
     return (
@@ -72,24 +64,10 @@ function App() {
                     Connect Wallet
                 </button>
             )}
-
-            <div className="wheel-container">
-                <div id="wheel" className="wheel">
-                    <div className="segment" style={{ "--rotation": "0deg" }}>0 KITTY</div>
-                    <div className="segment" style={{ "--rotation": "45deg" }}>10 KITTY</div>
-                    <div className="segment" style={{ "--rotation": "90deg" }}>20 KITTY</div>
-                    <div className="segment" style={{ "--rotation": "135deg" }}>30 KITTY</div>
-                    <div className="segment" style={{ "--rotation": "180deg" }}>40 KITTY</div>
-                    <div className="segment" style={{ "--rotation": "225deg" }}>50 KITTY</div>
-                    <div className="segment" style={{ "--rotation": "270deg" }}>60 KITTY</div>
-                    <div className="segment" style={{ "--rotation": "315deg" }}>100 KITTY</div>
-                </div>
-                <button id="spin" onClick={spinWheel}>Spin the Wheel</button>
-            </div>
-
-            {prize && <p>Your Prize: {prize}</p>}
+            <Wheel /> {/* Render the Wheel component */}
         </div>
     );
 }
 
 export default App;
+
