@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 50px; /* Çarkın üstünden biraz boşluk bırak */
 }
 
 .wheel {
@@ -33,7 +33,7 @@
 .sector:nth-child(7) { transform: rotate(308.58deg) skewY(-60deg); background-color: #4292f5; } /* Blue */
 
 .spin-button {
-  margin-top: 20px; /* Space above the spin button */
+  margin-top: 30px; /* Buton ile çark arasına daha fazla boşluk bırak */
   padding: 10px 20px; /* Button padding */
   font-size: 16px; /* Font size of the button text */
   cursor: pointer; /* Cursor changes to pointer on hover */
