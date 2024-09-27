@@ -19,7 +19,6 @@ body {
     height: 100%;
     border-radius: 50%;
     position: relative;
-    transform: rotate(0deg);
     transition: transform 4s cubic-bezier(0.1, 0.7, 0.2, 1);
 }
 
@@ -35,7 +34,7 @@ body {
     justify-content: center;
     color: white;
     font-weight: bold;
-    font-size: 24px; /* Increased font size for better visibility */
+    font-size: 24px;
     text-align: center;
 }
 
@@ -94,7 +93,7 @@ body {
 }
 
 .center-circle {
-    width: 40px; /* Increased size for better visibility */
+    width: 40px;
     height: 40px;
     background-color: white;
     border-radius: 50%;
@@ -133,5 +132,3 @@ button {
 #spinButton:hover {
     background-color: #007B9E; /* Darker Blue */
 }
-
-
