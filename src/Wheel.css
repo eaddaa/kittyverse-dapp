@@ -1,46 +1,29 @@
+/* Wheel container adjustments */
 .wheel-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 50px;
+    width: 300px; /* Width of the wheel */
+    height: 300px; /* Height of the wheel */
+    margin: 0 auto; /* Center the wheel */
+    position: relative; /* For positioning child elements */
 }
 
+/* Wheel styles */
 .wheel {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  border: 10px solid #ccc;
-  position: relative;
-  transform: rotate(0deg);
-  transition: transform 5s ease-out;
+    width: 100%; /* Fit the wheel to the container */
+    height: 100%; /* Fit the wheel to the container */
+    border-radius: 50%; /* Make the wheel circular */
+    transition: transform 4s cubic-bezier(0.05, 0.6, 0.2, 1); /* Rotation animation */
 }
 
-.sector {
-  position: absolute;
-  width: 50%;
-  height: 50%;
-  background-color: #f8d210;
-  border: 1px solid #fff;
-  transform-origin: 100% 100%;
+/* Button adjustments */
+button {
+    margin-top: 20px; /* Space between buttons */
+    padding: 10px 20px; /* Inner padding for buttons */
+    font-size: 16px; /* Increase font size */
+    display: inline-block; /* Align buttons side by side */
 }
 
-.sector:nth-child(1) { transform: rotate(0deg) skewY(-60deg); background-color: #f54242; }
-.sector:nth-child(2) { transform: rotate(51.43deg) skewY(-60deg); background-color: #f5a442; }
-.sector:nth-child(3) { transform: rotate(102.86deg) skewY(-60deg); background-color: #f5d442; }
-.sector:nth-child(4) { transform: rotate(154.29deg) skewY(-60deg); background-color: #9df542; }
-.sector:nth-child(5) { transform: rotate(205.72deg) skewY(-60deg); background-color: #42f554; }
-.sector:nth-child(6) { transform: rotate(257.15deg) skewY(-60deg); background-color: #42f5e6; }
-.sector:nth-child(7) { transform: rotate(308.58deg) skewY(-60deg); background-color: #4292f5; }
-
-.spin-button {
-  margin-top: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.prize-display {
-  margin-top: 20px;
-  font-size: 20px;
-  color: #333;
+/* Adjusting the Claim Token button visibility */
+.claim-button {
+    display: block; /* Ensure the button is visible */
+    margin: 10px auto; /* Center the button */
 }
