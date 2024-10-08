@@ -52,7 +52,7 @@ body {
 .sector:nth-child(10) { transform: rotate(324deg); }
 
 /* Butonlar */
-.spin-button, .claim-button, .controls button {
+.spin-button, .claim-button, .controls button, .wallet-button {
   margin-top: 10px;
   padding: 10px 20px;
   font-size: 1rem;
@@ -68,7 +68,7 @@ body {
   background-color: #ccc; /* Devre dışı buton rengi */
 }
 
-.spin-button:hover:not(:disabled), .claim-button:hover, .controls button:hover {
+.spin-button:hover:not(:disabled), .claim-button:hover, .controls button:hover, .wallet-button:hover {
   background-color: #5e3b8e; /* Koyu mor hover efekti */
 }
 
@@ -87,6 +87,20 @@ body {
 }
 
 .controls button:hover {
+  background-color: #5e3b8e; /* Koyu mor hover efekti */
+}
+
+/* Connect Wallet butonu */
+.wallet-button {
+  margin-top: 15px;
+  background-color: #7e57c2; /* Connect Wallet için mor arkaplan */
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.wallet-button:hover {
   background-color: #5e3b8e; /* Koyu mor hover efekti */
 }
 
