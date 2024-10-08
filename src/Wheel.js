@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './Wheel.css'; // CSS dosyasını unutma
-import audioFile from './sounds/spin-sound.mp3'; // Müzik dosyasını src dizininden import et
+import './Wheel.css';
+import spinSound from './sounds/spin-sound.mp3'; // Spin müziği
 import { ethers } from 'ethers';
 
 const Wheel = () => {
@@ -8,26 +8,25 @@ const Wheel = () => {
   const [isSpinning, setIsSpinning] = useState(false);
   const [userWalletAddress, setUserWalletAddress] = useState(null);
   const kittyTokenAddress = "0x0fd8a8af456b09c85bd63c65308e47c10da756a1"; // KITTY token kontrat adresi
-  const kittyDecimals = 18; // KITTY token'ın ondalık sayısı
-  const audio = new Audio(audioFile); // Müzik dosyasını yükle
+  const kittyDecimals = 18;
+  const spinAudio = new Audio(spinSound); // Müzik dosyası
 
   const spinWheel = () => {
     if (isSpinning) return;
     setIsSpinning(true);
-    audio.play(); // Müzik çalmaya başla
+    spinAudio.play(); // Çark dönerken müzik başlasın
 
-    // Çarkı rastgele bir açı ile döndür
-    const deg = Math.floor(5000 + Math.random() * 5000);
+    const deg = Math.floor(5000 + Math.random() * 5000); // Rastgele açıyı hesapla
     const wheel = document.getElementById('wheel');
     wheel.style.transition = 'transform 5s ease-out';
-    wheel.style.transform = `rotate(${deg}deg)`; // Dönüş açısını uygulama
+    wheel.style.transform = `rotate(${deg}deg)`; // Dönüş açısı
 
     setTimeout(() => {
-      const sectors = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]; // Dilimler
+      const sectors = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
       const chosenSector = sectors[Math.floor(Math.random() * sectors.length)];
       setPrize(chosenSector);
       setIsSpinning(false);
-    }, 5000); // 5 saniyelik dönüş süresi
+    }, 5000); // 5 saniyede çark tamamlanır
   };
 
   const connectWallet = async () => {
@@ -60,9 +59,9 @@ const Wheel = () => {
     try {
       const amountToTransfer = ethers.utils.parseUnits(prize.toString(), kittyDecimals);
       const tx = await kittyContract.transfer(userWalletAddress, amountToTransfer);
-      await tx.wait(); // İşlemin tamamlanmasını bekle
+      await tx.wait();
       alert(`Claim successful! ${prize} KITTY sent to your wallet.`);
-      setPrize(null); // Ödül talep edildikten sonra sıfırla
+      setPrize(null);
     } catch (error) {
       console.error("Claim failed:", error);
       alert('Claim failed. Please try again.');
@@ -89,7 +88,7 @@ const Wheel = () => {
       {prize !== null && (
         <div className="prize-display">
           Your Prize: {prize} KITTY 
-          <button onClick={claimPrize} className="claim-button">Claim {prize} KITTY</button> {/* Claim butonu */}
+          <button onClick={claimPrize} className="claim-button">Claim {prize} KITTY</button>
         </div>
       )}
     </div>
