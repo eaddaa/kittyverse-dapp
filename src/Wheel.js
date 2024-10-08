@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Wheel.css'; // CSS dosyasını unutma
 import audioFile from './sounds/spin-sound.mp3'; // Müzik dosyasını src dizininden import et
+import { ethers } from 'ethers';
 
 const Wheel = () => {
   const [prize, setPrize] = useState(null);
   const [isSpinning, setIsSpinning] = useState(false);
   const [audio] = useState(new Audio(audioFile)); // Müzik dosyasını yükle
+  const kittyTokenAddress = "0x0fd8a8af456b09c85bd63c65308e47c10da756a1"; // KITTY token kontrat adresi
+  const kittyDecimals = 18; // KITTY token'ın ondalık sayısı
+  const [userWalletAddress, setUserWalletAddress] = useState(null);
 
   const spinWheel = () => {
     if (isSpinning) return;
@@ -26,20 +30,48 @@ const Wheel = () => {
     }, 5000); // 5 saniyelik dönüş süresi
   };
 
-  const claimPrize = () => {
-    if (prize !== null) {
-      // Burada kazançları cüzdana ekleme işlemi simüle ediliyor
-      alert(`You have successfully claimed ${prize} KITTY!`); // Kullanıcıya bildirim
-      // Kazancı sıfırlayın
-      setPrize(null); 
+  const connectWallet = async () => {
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        setUserWalletAddress(accounts[0]);
+        console.log(`Connected wallet: ${accounts[0]}`);
+      } catch (error) {
+        console.error('User rejected the request:', error);
+      }
     } else {
-      alert('No prize to claim!'); // Talep edilecek bir ödül yoksa uyarı
+      alert('Please install MetaMask or another Ethereum wallet provider.');
+    }
+  };
+
+  const claimPrize = async () => {
+    if (!userWalletAddress || prize === null) {
+      alert('Please connect your wallet and spin the wheel first!');
+      return;
+    }
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = provider.getSigner();
+
+    const kittyContract = new ethers.Contract(kittyTokenAddress, [
+      "function transfer(address recipient, uint256 amount) public returns (bool)"
+    ], signer);
+
+    try {
+      const amountToTransfer = ethers.utils.parseUnits(prize.toString(), kittyDecimals);
+      const tx = await kittyContract.transfer(userWalletAddress, amountToTransfer);
+      await tx.wait(); // İşlemin tamamlanmasını bekle
+      alert(`Claim successful! ${prize} KITTY sent to your wallet.`);
+      setPrize(null); // Ödül talep edildikten sonra sıfırla
+    } catch (error) {
+      console.error("Claim failed:", error);
+      alert('Claim failed. Please try again.');
     }
   };
 
   return (
     <div className="wheel-container">
-      <div className="intro-text">Spin the Wheel to Win KITTY Tokens!</div> {/* Giriş yazısı */}
+      <div className="welcome-text">Welcome to Kittverse!</div> {/* Giriş yazısı */}
       <div id="wheel" className="wheel">
         <div className="sector" style={{ backgroundColor: '#FFDD57' }}></div>
         <div className="sector" style={{ backgroundColor: '#FF6B6B' }}></div>
@@ -65,6 +97,9 @@ const Wheel = () => {
         <button onClick={() => audio.pause()}>Stop Music</button> {/* Müzik durdurma butonu */}
         <button onClick={() => audio.play()}>Play Music</button> {/* Müzik oynatma butonu */}
       </div>
+      <button onClick={connectWallet} className="connect-button">
+        Connect Wallet
+      </button>
     </div>
   );
 };
