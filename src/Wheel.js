@@ -16,7 +16,6 @@ const Wheel = () => {
     setIsSpinning(true);
     audio.play(); // Müzik çalmaya başla
 
-    // Çarkı rastgele bir açı ile döndür
     const deg = Math.floor(5000 + Math.random() * 5000);
     const wheel = document.getElementById('wheel');
     wheel.style.transition = 'transform 5s ease-out';
@@ -71,7 +70,7 @@ const Wheel = () => {
 
   return (
     <div className="wheel-container">
-      <div className="intro-text">Welcome to Kittverse!</div> {/* Giriş yazısı */}
+      <div className="intro-text">Ⓦⓔⓛⓒⓞⓜⓔ ⓣⓞ ⓀⓘⓣⓣⓥⓔⓇⓢⓔ</div> {/* Giriş yazısı */}
       <div id="wheel" className="wheel">
         {Array.from({ length: 10 }, (_, i) => (
           <div key={i} className="sector" style={{ backgroundColor: `hsl(${i * 36}, 100%, 50%)` }}>
@@ -100,3 +99,4 @@ const Wheel = () => {
 };
 
 export default Wheel;
+

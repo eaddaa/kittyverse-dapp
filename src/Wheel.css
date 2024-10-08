@@ -1,35 +1,36 @@
-/* Genel stiller */
 body {
   margin: 0;
-  padding: 0;
   font-family: Arial, sans-serif;
-  height: 100vh;
-  background: linear-gradient(135deg, #d8a1f0, #7e57c2); /* Fuşya-mor geçişli arka plan */
-  overflow: hidden;
 }
 
-/* Çark container'ı */
 .wheel-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100%; /* Tüm sayfa yüksekliği */
-  background: linear-gradient(135deg, rgba(216, 161, 240, 0.5), rgba(126, 87, 194, 0.5)); /* Gölgeli arka plan */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Hafif gölge efekti */
+  height: 100vh;
+  background: linear-gradient(135deg, rgba(228, 193, 255, 0.5), rgba(118, 27, 139, 0.5)); /* Açık mordan koyu mora geçiş */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Gölgeli etki */
 }
 
-/* Çark */
+.intro-text {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #5c2e91; /* Koyu mor */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
 .wheel {
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  border: 10px solid #7e57c2; /* Çarkın dış kenar rengi, mor */
+  border: 10px solid #fff; /* Çarkın dış kenar rengi */
   position: relative;
   overflow: hidden;
 }
 
-/* Dilimler */
 .sector {
   position: absolute;
   width: 50%;
@@ -51,14 +52,13 @@ body {
 .sector:nth-child(9) { transform: rotate(288deg); }
 .sector:nth-child(10) { transform: rotate(324deg); }
 
-/* Butonlar */
-.spin-button, .claim-button, .controls button, .wallet-button {
+.spin-button, .connect-button, .claim-button {
   margin-top: 10px;
   padding: 10px 20px;
   font-size: 1rem;
   border: none;
   border-radius: 5px;
-  background-color: #7e57c2; /* Mor arkaplan */
+  background-color: #e63946; /* Fuşya renk */
   color: white;
   cursor: pointer;
   transition: background-color 0.3s;
@@ -68,39 +68,13 @@ body {
   background-color: #ccc; /* Devre dışı buton rengi */
 }
 
-.spin-button:hover:not(:disabled), .claim-button:hover, .controls button:hover, .wallet-button:hover {
-  background-color: #5e3b8e; /* Koyu mor hover efekti */
+.spin-button:hover:not(:disabled), .connect-button:hover, .claim-button:hover {
+  background-color: #d62839; /* Buton hover rengi */
 }
 
-/* Ödül gösterimi */
 .prize-display {
   margin-top: 20px;
   font-size: 1.5rem;
-  color: #4a2c66; /* Koyu mor metin */
-}
-
-/* Müzik kontrol butonları */
-.controls button {
-  margin: 5px;
-  background-color: #7e57c2; /* Mor buton arka planı */
   color: #fff;
-}
-
-.controls button:hover {
-  background-color: #5e3b8e; /* Koyu mor hover efekti */
-}
-
-/* Connect Wallet butonu */
-.wallet-button {
-  margin-top: 15px;
-  background-color: #7e57c2; /* Connect Wallet için mor arkaplan */
-  color: #fff;
-  padding: 10px;
-  border-radius: 5px;
-  transition: background-color 0.3s;
-}
-
-.wallet-button:hover {
-  background-color: #5e3b8e; /* Koyu mor hover efekti */
 }
 
