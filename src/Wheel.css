@@ -1,85 +1,89 @@
-body {
-  font-family: 'Arial', sans-serif;
-  background-color: #f0f0f0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  margin: 0;
-}
-
 .wheel-container {
-  text-align: center;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
 }
 
 .wheel {
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  border: 10px solid #007bff; /* Çarkın dış çerçevesi için renk */
-  position: relative;
-  overflow: hidden;
-  margin: 20px auto;
+  width: 300px; /* Çarkın genişliği */
+  height: 300px; /* Çarkın yüksekliği */
+  border-radius: 50%; /* Daire görünümü */
+  background-color: #007bff; /* Çarkın arka plan rengi */
+  position: relative; /* Pozisyonlandırma için gerekli */
+  overflow: hidden; /* Taşan kısımları gizle */
+  border: 10px solid #0056b3; /* Çarkın dış kenarı */
 }
 
 .sector {
   position: absolute;
-  width: 50%;
-  height: 50%;
-  background: #007bff; /* Dilimlerin arka plan rengi */
-  color: white;
-  text-align: right;
-  line-height: 150px; /* Dikey ortalama için ayarla */
-  border-left: 10px solid white; /* Dilimlerin kenarları için */
-  transform-origin: 100% 100%;
-  transform: rotate(calc(30deg * var(--i))); /* Her bir dilimi döndür */
+  width: 50%; /* Her dilimin genişliği */
+  height: 50%; /* Her dilimin yüksekliği */
+  background-color: #007bff; /* Dilim rengi */
+  border: 2px solid #fff; /* Dilim kenarları */
+  transform-origin: 100% 100%; /* Dönme noktasını ayarla */
 }
 
-/* Her bir dilimin konumunu ayarlamak için CSS değişkenleri kullanın */
-.sector:nth-child(1) { --i: 0; }
-.sector:nth-child(2) { --i: 1; }
-.sector:nth-child(3) { --i: 2; }
-.sector:nth-child(4) { --i: 3; }
-.sector:nth-child(5) { --i: 4; }
-.sector:nth-child(6) { --i: 5; }
-.sector:nth-child(7) { --i: 6; }
-.sector:nth-child(8) { --i: 7; }
-.sector:nth-child(9) { --i: 8; }
-.sector:nth-child(10) { --i: 9; }
-.sector:nth-child(11) { --i: 10; }
+.sector:nth-child(1) { transform: rotate(0deg); }
+.sector:nth-child(2) { transform: rotate(36deg); }
+.sector:nth-child(3) { transform: rotate(72deg); }
+.sector:nth-child(4) { transform: rotate(108deg); }
+.sector:nth-child(5) { transform: rotate(144deg); }
+.sector:nth-child(6) { transform: rotate(180deg); }
+.sector:nth-child(7) { transform: rotate(216deg); }
+.sector:nth-child(8) { transform: rotate(252deg); }
+.sector:nth-child(9) { transform: rotate(288deg); }
+.sector:nth-child(10) { transform: rotate(324deg); }
 
-.spin-button,
-.connect-button,
-.claim-button {
-  margin: 10px;
+.prize-display {
+  margin-top: 20px;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.spin-button, .connect-button, .claim-button {
+  margin-top: 10px;
   padding: 10px 20px;
+  font-size: 16px;
   border: none;
   border-radius: 5px;
   color: white;
-  background-color: #007bff;
   cursor: pointer;
-  transition: background-color 0.3s;
 }
 
-.spin-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.spin-button {
+  background-color: #28a745; /* Yeşil buton rengi */
 }
 
-.spin-button:hover:not(:disabled),
-.connect-button:hover,
-.claim-button:hover {
-  background-color: #0056b3;
+.connect-button {
+  background-color: #007bff; /* Mavi buton rengi */
 }
 
-.prize-display {
-  font-size: 20px;
-  margin-top: 15px;
+.claim-button {
+  background-color: #ffc107; /* Sarı buton rengi */
+}
+
+.center-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Ortada konumlandırma */
+  font-size: 36px;
+  color: white;
   font-weight: bold;
+}
+
+.music-controls {
+  margin-top: 20px;
+}
+
+.mute-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #6c757d; /* Gri buton rengi */
+  color: white;
+  cursor: pointer;
 }
 
