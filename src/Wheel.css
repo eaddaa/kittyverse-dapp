@@ -1,65 +1,45 @@
 .wheel-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #6a11cb, #2575fc);
-  color: white;
-  text-align: center;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-}
-
-.intro-text {
-  font-size: 2rem;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+  background-color: #F8F9FA;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .wheel {
+  margin: 20px auto;
   width: 300px;
   height: 300px;
   border-radius: 50%;
-  border: 10px solid #fff;
+  border: 5px solid #333;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
 }
 
 .sector {
   position: absolute;
   width: 50%;
   height: 50%;
-  border: 2px solid #fff;
+  background: transparent;
+  border-left: 5px solid #333;
   transform-origin: 100% 100%;
-  clip-path: polygon(100% 100%, 0 100%, 0 0);
 }
 
-.spin-button, .connect-button, .claim-button {
-  background-color: #FFDD57;
-  color: black;
+.spin-button, .claim-button {
+  margin-top: 20px;
+  padding: 10px 20px;
   border: none;
   border-radius: 5px;
-  padding: 10px 20px;
-  margin: 10px;
   cursor: pointer;
-  font-size: 1.2rem;
-  transition: background-color 0.3s;
 }
 
-.spin-button:hover, .connect-button:hover, .claim-button:hover {
-  background-color: #FFC107;
+.spin-button {
+  background-color: #4CAF50; /* Yeşil arka plan */
+  color: white;
 }
 
-.prize-display {
-  margin-top: 20px;
-  font-size: 1.5rem;
-  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-}
-
-.controls button {
-  margin: 5px;
+.claim-button {
+  background-color: #2196F3; /* Mavi arka plan */
+  color: white;
 }
 
 

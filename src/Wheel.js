@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Wheel.css'; // CSS dosyasını unutma
 import audioFile from './sounds/spin-sound.mp3'; // Müzik dosyasını src dizininden import et
-import { ethers } from 'ethers';
 
 const Wheel = () => {
   const [prize, setPrize] = useState(null);
   const [isSpinning, setIsSpinning] = useState(false);
-  const [userWalletAddress, setUserWalletAddress] = useState(null);
-  const kittyTokenAddress = "0x0fd8a8af456b09c85bd63c65308e47c10da756a1"; // KITTY token kontrat adresi
-  const kittyDecimals = 18; // KITTY token'ın ondalık sayısı
   const audio = new Audio(audioFile); // Müzik dosyasını yükle
 
   const spinWheel = () => {
@@ -20,7 +16,7 @@ const Wheel = () => {
     const deg = Math.floor(5000 + Math.random() * 5000);
     const wheel = document.getElementById('wheel');
     wheel.style.transition = 'transform 5s ease-out';
-    wheel.style.transform = `rotate(${deg}deg)`; // Dönüş açısını uygulama
+    wheel.style.transform = `rotate(${deg}deg)`; // Düzgün bir dönüş için template literal kullan
 
     setTimeout(() => {
       const sectors = [10, 20, 30, 40, 50, 60, 70, 80, 90, 100]; // Dilimler
@@ -30,60 +26,36 @@ const Wheel = () => {
     }, 5000); // 5 saniyelik dönüş süresi
   };
 
-  const connectWallet = async () => {
-    if (typeof window.ethereum !== 'undefined') {
-      try {
-        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-        setUserWalletAddress(accounts[0]);
-        console.log(`Connected wallet: ${accounts[0]}`);
-      } catch (error) {
-        console.error('User rejected the request:', error);
-      }
+  const claimPrize = () => {
+    if (prize !== null) {
+      // Burada kazançları cüzdana ekleme işlemi simüle ediliyor
+      alert(`You have successfully claimed ${prize} KITTY!`); // Kullanıcıya bildirim
+      // Kazancı sıfırlayın
+      setPrize(null);
     } else {
-      alert('Please install MetaMask or another Ethereum wallet provider.');
-    }
-  };
-
-  const claimPrize = async () => {
-    if (!userWalletAddress || prize === null) {
-      alert('Please connect your wallet and spin the wheel first!');
-      return;
-    }
-
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-
-    const kittyContract = new ethers.Contract(kittyTokenAddress, [
-      "function transfer(address recipient, uint256 amount) public returns (bool)"
-    ], signer);
-
-    try {
-      const amountToTransfer = ethers.utils.parseUnits(prize.toString(), kittyDecimals);
-      const tx = await kittyContract.transfer(userWalletAddress, amountToTransfer);
-      await tx.wait(); // İşlemin tamamlanmasını bekle
-      alert(`Claim successful! ${prize} KITTY sent to your wallet.`);
-      setPrize(null); // Ödül talep edildikten sonra sıfırla
-    } catch (error) {
-      console.error("Claim failed:", error);
-      alert('Claim failed. Please try again.');
+      alert('No prize to claim!'); // Talep edilecek bir ödül yoksa uyarı
     }
   };
 
   return (
-    <div className="wheel-container">
-      <div className="intro-text">Welcome to Kittverse!</div> {/* Giriş yazısı */}
+    <div className="wheel-container" style={{ backgroundColor: '#F8F9FA', padding: '20px', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)' }}>
+      <div className="welcome-text" style={{ textAlign: 'center', fontSize: '24px', fontWeight: 'bold', marginBottom: '20px', color: '#5A5A5A', textShadow: '1px 1px 2px rgba(255, 255, 255, 0.8)' }}>
+        Welcome to Kittverse
+      </div>
       <div id="wheel" className="wheel">
-        {Array.from({ length: 10 }, (_, i) => (
-          <div key={i} className="sector" style={{ backgroundColor: `hsl(${i * 36}, 100%, 50%)` }}>
-            {i * 10 + 10}
-          </div>
-        ))}
+        <div className="sector" style={{ backgroundColor: '#FFDD57' }}></div>
+        <div className="sector" style={{ backgroundColor: '#FF6B6B' }}></div>
+        <div className="sector" style={{ backgroundColor: '#6BCB77' }}></div>
+        <div className="sector" style={{ backgroundColor: '#4D96FF' }}></div>
+        <div className="sector" style={{ backgroundColor: '#FFC107' }}></div>
+        <div className="sector" style={{ backgroundColor: '#FD7E14' }}></div>
+        <div className="sector" style={{ backgroundColor: '#20C997' }}></div>
+        <div className="sector" style={{ backgroundColor: '#17A2B8' }}></div>
+        <div className="sector" style={{ backgroundColor: '#6610f2' }}></div>
+        <div className="sector" style={{ backgroundColor: '#e83e8c' }}></div>
       </div>
       <button onClick={spinWheel} disabled={isSpinning} className="spin-button">
         {isSpinning ? 'Spinning...' : 'Spin the Wheel'}
-      </button>
-      <button onClick={connectWallet} className="connect-button">
-        Connect Wallet
       </button>
       {prize !== null && (
         <div className="prize-display">
