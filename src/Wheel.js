@@ -25,6 +25,12 @@ const Wheel = () => {
     }, 5000); // 5 saniyelik dönüş süresi
   };
 
+  const claimPrize = () => {
+    // Ödül kazanma işlevi burada simüle ediliyor
+    alert(`You have claimed ${prize} KITTY!`);
+    setPrize(null); // Ödülü talep ettikten sonra sıfırla
+  };
+
   return (
     <div className="wheel-container">
       <div className="intro-text">Spin the Wheel to Win KITTY Tokens!</div> {/* Giriş yazısı */}
@@ -43,7 +49,12 @@ const Wheel = () => {
       <button onClick={spinWheel} disabled={isSpinning} className="spin-button">
         {isSpinning ? 'Spinning...' : 'Spin the Wheel'}
       </button>
-      {prize !== null && <div className="prize-display">Your Prize: {prize} KITTY</div>}
+      {prize !== null && (
+        <div className="prize-display">
+          Your Prize: {prize} KITTY 
+          <button onClick={claimPrize} className="claim-button">Claim</button> {/* Claim butonu */}
+        </div>
+      )}
       <div className="controls">
         <button onClick={() => audio.pause()}>Stop Music</button> {/* Müzik durdurma butonu */}
         <button onClick={() => audio.play()}>Play Music</button> {/* Müzik oynatma butonu */}
