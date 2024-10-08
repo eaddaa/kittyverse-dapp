@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './Wheel.css'; // CSS dosyasını unutma
+import audioFile from './sounds/spin-sound.mp3'; // Müzik dosyasını src dizininden import et
 
 const Wheel = () => {
   const [prize, setPrize] = useState(null);
   const [isSpinning, setIsSpinning] = useState(false);
-  const [audio] = useState(new Audio('/spin-sound.mp3')); // Müzik dosyasını yükle
+  const [audio] = useState(new Audio(audioFile)); // Müzik dosyasını yükle
 
   const spinWheel = () => {
     if (isSpinning) return;
@@ -26,9 +27,14 @@ const Wheel = () => {
   };
 
   const claimPrize = () => {
-    // Ödül kazanma işlevi burada simüle ediliyor
-    alert(`You have claimed ${prize} KITTY!`);
-    setPrize(null); // Ödülü talep ettikten sonra sıfırla
+    if (prize !== null) {
+      // Burada kazançları cüzdana ekleme işlemi simüle ediliyor
+      alert(`You have successfully claimed ${prize} KITTY!`); // Kullanıcıya bildirim
+      // Kazancı sıfırlayın
+      setPrize(null); 
+    } else {
+      alert('No prize to claim!'); // Talep edilecek bir ödül yoksa uyarı
+    }
   };
 
   return (
@@ -64,4 +70,5 @@ const Wheel = () => {
 };
 
 export default Wheel;
+
 
