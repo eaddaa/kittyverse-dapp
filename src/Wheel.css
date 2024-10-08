@@ -1,0 +1,80 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.wheel-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, rgba(255, 209, 87, 0.5), rgba(255, 107, 107, 0.5)); /* Renkli geçişli arka plan */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Gölgeli etki */
+}
+
+.intro-text {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+.wheel {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 10px solid #fff; /* Çarkın dış kenar rengi */
+  position: relative;
+  overflow: hidden;
+}
+
+.sector {
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  background: #fff;
+  border: 1px solid #ddd;
+  transform-origin: 100% 100%;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5); /* İç gölge */
+}
+
+.sector:nth-child(1) { transform: rotate(0deg); }
+.sector:nth-child(2) { transform: rotate(36deg); }
+.sector:nth-child(3) { transform: rotate(72deg); }
+.sector:nth-child(4) { transform: rotate(108deg); }
+.sector:nth-child(5) { transform: rotate(144deg); }
+.sector:nth-child(6) { transform: rotate(180deg); }
+.sector:nth-child(7) { transform: rotate(216deg); }
+.sector:nth-child(8) { transform: rotate(252deg); }
+.sector:nth-child(9) { transform: rotate(288deg); }
+.sector:nth-child(10) { transform: rotate(324deg); }
+
+.spin-button, .connect-button, .claim-button {
+  margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.spin-button:disabled {
+  background-color: #ccc; /* Devre dışı buton rengi */
+}
+
+.spin-button:hover:not(:disabled), .connect-button:hover, .claim-button:hover {
+  background-color: #0056b3;
+}
+
+.prize-display {
+  margin-top: 20px;
+  font-size: 1.5rem;
+  color: #fff;
+}
+
