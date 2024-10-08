@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Wheel.css'; // CSS dosyasını unutma
 import audioFile from './sounds/spin-sound.mp3'; // Müzik dosyasını src dizininden import et
 import { ethers } from 'ethers';
@@ -16,6 +16,7 @@ const Wheel = () => {
     setIsSpinning(true);
     audio.play(); // Müzik çalmaya başla
 
+    // Çarkı rastgele bir açı ile döndür
     const deg = Math.floor(5000 + Math.random() * 5000);
     const wheel = document.getElementById('wheel');
     wheel.style.transition = 'transform 5s ease-out';
@@ -70,7 +71,6 @@ const Wheel = () => {
 
   return (
     <div className="wheel-container">
-      <div className="intro-text">Ⓦⓔⓛⓒⓞⓜⓔ ⓣⓞ ⓀⓘⓣⓣⓥⓔⓇⓢⓔ</div> {/* Giriş yazısı */}
       <div id="wheel" className="wheel">
         {Array.from({ length: 10 }, (_, i) => (
           <div key={i} className="sector" style={{ backgroundColor: `hsl(${i * 36}, 100%, 50%)` }}>
@@ -81,22 +81,21 @@ const Wheel = () => {
       <button onClick={spinWheel} disabled={isSpinning} className="spin-button">
         {isSpinning ? 'Spinning...' : 'Spin the Wheel'}
       </button>
-      <button onClick={connectWallet} className="connect-button">
-        Connect Wallet
-      </button>
+      {!userWalletAddress && (
+        <button onClick={connectWallet} className="connect-button">
+          Connect Wallet
+        </button>
+      )}
       {prize !== null && (
         <div className="prize-display">
           Your Prize: {prize} KITTY 
-          <button onClick={claimPrize} className="claim-button">Claim</button> {/* Claim butonu */}
+          <button onClick={claimPrize} className="claim-button">Claim {prize} KITTY</button> {/* Claim butonu */}
         </div>
       )}
-      <div className="controls">
-        <button onClick={() => audio.pause()}>Stop Music</button> {/* Müzik durdurma butonu */}
-        <button onClick={() => audio.play()}>Play Music</button> {/* Müzik oynatma butonu */}
-      </div>
     </div>
   );
 };
 
 export default Wheel;
+
 
