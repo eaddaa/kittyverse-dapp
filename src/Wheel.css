@@ -1,46 +1,85 @@
-.wheel-container {
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin-top: 50px; /* Çarkın üstünden biraz boşluk bırak */
+  height: 100vh;
+  margin: 0;
+}
+
+.wheel-container {
+  text-align: center;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 400px;
 }
 
 .wheel {
-  width: 300px; /* Width of the wheel */
-  height: 300px; /* Height of the wheel */
-  border-radius: 50%; /* Makes the wheel circular */
-  border: 10px solid #ccc; /* Border around the wheel */
-  position: relative; /* Position for absolute elements inside */
-  transform: rotate(0deg); /* Initial rotation */
-  transition: transform 5s ease-out; /* Spin transition */
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  border: 10px solid #007bff; /* Çarkın dış çerçevesi için renk */
+  position: relative;
+  overflow: hidden;
+  margin: 20px auto;
 }
 
 .sector {
-  position: absolute; /* Position sectors absolutely */
-  width: 50%; /* Each sector takes half the width */
-  height: 50%; /* Each sector takes half the height */
-  background-color: #f8d210; /* Default background color */
-  border: 1px solid #fff; /* White border for each sector */
-  transform-origin: 100% 100%; /* Set the rotation point to the bottom right */
+  position: absolute;
+  width: 50%;
+  height: 50%;
+  background: #007bff; /* Dilimlerin arka plan rengi */
+  color: white;
+  text-align: right;
+  line-height: 150px; /* Dikey ortalama için ayarla */
+  border-left: 10px solid white; /* Dilimlerin kenarları için */
+  transform-origin: 100% 100%;
+  transform: rotate(calc(30deg * var(--i))); /* Her bir dilimi döndür */
 }
 
-.sector:nth-child(1) { transform: rotate(0deg) skewY(-60deg); background-color: #f54242; } /* Red */
-.sector:nth-child(2) { transform: rotate(51.43deg) skewY(-60deg); background-color: #f5a442; } /* Orange */
-.sector:nth-child(3) { transform: rotate(102.86deg) skewY(-60deg); background-color: #f5d442; } /* Yellow */
-.sector:nth-child(4) { transform: rotate(154.29deg) skewY(-60deg); background-color: #9df542; } /* Light Green */
-.sector:nth-child(5) { transform: rotate(205.72deg) skewY(-60deg); background-color: #42f554; } /* Green */
-.sector:nth-child(6) { transform: rotate(257.15deg) skewY(-60deg); background-color: #42f5e6; } /* Cyan */
-.sector:nth-child(7) { transform: rotate(308.58deg) skewY(-60deg); background-color: #4292f5; } /* Blue */
+/* Her bir dilimin konumunu ayarlamak için CSS değişkenleri kullanın */
+.sector:nth-child(1) { --i: 0; }
+.sector:nth-child(2) { --i: 1; }
+.sector:nth-child(3) { --i: 2; }
+.sector:nth-child(4) { --i: 3; }
+.sector:nth-child(5) { --i: 4; }
+.sector:nth-child(6) { --i: 5; }
+.sector:nth-child(7) { --i: 6; }
+.sector:nth-child(8) { --i: 7; }
+.sector:nth-child(9) { --i: 8; }
+.sector:nth-child(10) { --i: 9; }
+.sector:nth-child(11) { --i: 10; }
 
-.spin-button {
-  margin-top: 50px; /* Buton ile çark arasına daha fazla boşluk bırak */
-  padding: 10px 20px; /* Button padding */
-  font-size: 16px; /* Font size of the button text */
-  cursor: pointer; /* Cursor changes to pointer on hover */
+.spin-button,
+.connect-button,
+.claim-button {
+  margin: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: #007bff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.spin-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.spin-button:hover:not(:disabled),
+.connect-button:hover,
+.claim-button:hover {
+  background-color: #0056b3;
 }
 
 .prize-display {
-  margin-top: 20px; /* Space above the prize display */
-  font-size: 20px; /* Font size for the prize text */
-  color: #333; /* Text color */
+  font-size: 20px;
+  margin-top: 15px;
+  font-weight: bold;
 }
+
