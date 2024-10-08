@@ -6,12 +6,21 @@ const Wheel = () => {
   const [prize, setPrize] = useState(null);
   const [isSpinning, setIsSpinning] = useState(false);
   const [userWalletAddress, setUserWalletAddress] = useState(null);
+  const [isMuted, setIsMuted] = useState(false); // Sesin açık/kapalı durumu
   const kittyTokenAddress = "0x0fd8a8af456b09c85bd63c65308e47c10da756a1"; // KITTY token kontrat adresi
   const kittyDecimals = 18; // KITTY token'ın ondalık sayısı
+
+  // Ses dosyasını yükle
+  const spinSound = new Audio('/spin-sound.mp3');
 
   const spinWheel = () => {
     if (isSpinning) return;
     setIsSpinning(true);
+
+    // Ses çalma
+    if (!isMuted) {
+      spinSound.play();
+    }
 
     const deg = Math.floor(5000 + Math.random() * 5000); // 5000 ile 10000 derece arasında rastgele bir açı
     const wheel = document.getElementById('wheel');
@@ -54,7 +63,6 @@ const Wheel = () => {
     ], signer);
 
     try {
-      // KITTY token'ının ondalık sayısını göz önünde bulundurarak ödül miktarını ayarla
       const amountToTransfer = ethers.utils.parseUnits(prize.toString(), kittyDecimals);
       const tx = await kittyContract.transfer(userWalletAddress, amountToTransfer);
       await tx.wait(); // İşlemin tamamlanmasını bekle
@@ -66,12 +74,23 @@ const Wheel = () => {
     }
   };
 
+  const toggleMute = () => {
+    setIsMuted(!isMuted);
+    if (isMuted) {
+      spinSound.play(); // Ses açıldığında ses çalsın
+    } else {
+      spinSound.pause(); // Ses kapandığında durdur
+      spinSound.currentTime = 0; // Sesin başlangıcına geri döner
+    }
+  };
+
   return (
     <div className="wheel-container">
       <div id="wheel" className="wheel">
         {Array.from({ length: 11 }, (_, i) => (
           <div key={i} className="sector">{i * 10}</div>
         ))}
+        <div className="center-text">100</div> {/* Ortada 100 yazısı */}
       </div>
       <button onClick={spinWheel} disabled={isSpinning} className="spin-button">
         {isSpinning ? 'Spinning...' : 'Spin the Wheel'}
@@ -87,6 +106,11 @@ const Wheel = () => {
           </button>
         </>
       )}
+      <div className="music-controls">
+        <button onClick={toggleMute} className="mute-button">
+          {isMuted ? 'Unmute' : 'Mute'}
+        </button>
+      </div>
     </div>
   );
 };
